@@ -19,11 +19,20 @@
 
 * Expected Results: keyboard doesn't work.
 ### Problems encountered during compilation of Own Build Kernel
-> problem1
+> Problem1
 > 
-> >Error ID: BLKCACHE_IOERR(virtual machine stopped at middle of compilation)
-> >
-> >**solution: check and free virtual machine installed driver**
-
-
-
+>>**Error ID: BLKCACHE_IOERR(virtual machine stopped at middle of compilation)**
+>>
+>>Solution: check and free virtual machine installed driver
+>>
+> Problem2
+> 
+>>**Attempting to compile kernel yields a certification error(Makefile:1726: recipe for target 'certs' failed)**
+>>
+>>Solution: In the .config file copied from /boot find and comment out the lines CONFIG_SYSTEM_TRUSTED_KEYS and CONFIG_MODULE_SIG_KEY
+>>
+> Problem3
+> 
+>>**BTF: .tmp_vmlinux.btf: pahole (pahole) is not available Failed to generate BTF for vmlinux**
+>>
+>>Solution:
