@@ -62,14 +62,39 @@
 
 > **Problem1**
 >
->>**Makefile:632: include/config/auto.conf: No such file or directory
+>>**Makefile:632: include/config/auto.conf: No such file or directory**
 >>
->>ERROR: Kernel configuration is invalid.
+>>**ERROR: Kernel configuration is invalid.**
 >>
->>make[2]: *** No rule to make target '/home/km/Downloads/hello/hello.o', needed by '__build'.**
+>>**make[2]: *** No rule to make target '/home/km/Downloads/hello/hello.o', needed by '__build'.**
 >>
 >>**Solution:** Go to kernel source tree and once configure the kernel and compile
 >>
 >>`make menuconfig`
 >>
 >>`make`
+
+### Module Dependency
+
+#### Practice1: 
+
+* Create two modules(add.c and avg.c), avg.c module uses add symbol in add.c module and compile and try to load avg.c module
+* Expected results: 
+* * 1. avg loading gives error as avg module depends on add module(unknown symbol "add")
+* * 2. first load add module and next avg module gives success 
+
+##### Problems encountered during compilation of Multiple Modules and Installation
+
+> **Problem1**
+>
+>> **SSL error:02001002:system library:fopen:No such file or directory: ../crypto/bio/bss_file.c:72**
+>> 
+>> **SSL error:2006D080:BIO routines:BIO_new_file:no such file: ../crypto/bio/bss_file.c:79**
+>> 
+>> **sign-file: certs/signing_key.pem: No such file or directory**
+>>
+>>> **Description:**
+>>> ###### **Signed kernel module support**
+>>> Since Linux kernel version 3.7 onwards, support has been added for signed kernel modules. When enabled, the Linux kernel will only load kernel modules that are digitally signed with the proper key. This allows further hardening of the system by disallowing unsigned kernel modules, or kernel modules signed with the wrong key, to be loaded. Malicious kernel modules are a common method for loading rootkits on a Linux system.
+>>>  ###### **Enabling module signature verification**
+>>>  Enabling support is a matter of toggling a few settings in the Linux kernel configuration. Unless you want to use your own keypair, this is all that has to be done to enable kernel module support. It must also be noted that a change of file structure occurred in kernel version 4.3.3. So from this version and above the certificates and a sign files used to manually sign modules has moved into: /usr/src/linux/certs/ Also the sign-file perl script is now directly executable in later kernel versions and does not require you to execute the perl command. Adjust the installation and setup methods accordingly to the kernel version that will be used. 
